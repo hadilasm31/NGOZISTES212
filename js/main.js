@@ -31,6 +31,47 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Gestion de la vidéo sur mobile
+const video = document.querySelector('.hero-video video');
+const videoControl = document.querySelector('.video-control');
+
+if (video && videoControl) {
+    // Détection mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Sur mobile, on désactive autoplay et on attend l'interaction utilisateur
+        video.pause();
+        videoControl.innerHTML = '<i class="fas fa-play"></i>';
+        
+        videoControl.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                videoControl.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                video.pause();
+                videoControl.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+    } else {
+        // Sur desktop, on laisse l'autoplay
+        video.play().catch(error => {
+            console.log('Autoplay prevented:', error);
+            videoControl.style.display = 'flex';
+        });
+        
+        videoControl.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                videoControl.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                video.pause();
+                videoControl.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+    }
+}
+
 // Header transparent au scroll
 const header = document.querySelector('.header');
 window.addEventListener('scroll', () => {
