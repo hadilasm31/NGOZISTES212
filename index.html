@@ -43,9 +43,17 @@
             </div>
         </div>
         <div class="hero-video">
-            <video autoplay muted loop>
+            <!-- Multiple sources pour compatibilité -->
+            <video autoplay muted loop playsinline poster="images/hero/hero-poster.jpg">
                 <source src="images/hero/hero-video.mp4" type="video/mp4">
+                <source src="images/hero/hero-video.webm" type="video/webm">
+                <!-- Fallback pour les navigateurs qui ne supportent pas la vidéo -->
+                <img src="images/hero/hero-fallback.jpg" alt="Ngozistes du Royaume" class="video-fallback">
             </video>
+            <!-- Bouton de contrôle manuel pour mobile -->
+            <button class="video-control" aria-label="Contrôle vidéo">
+                <i class="fas fa-play"></i>
+            </button>
         </div>
     </section>
 
